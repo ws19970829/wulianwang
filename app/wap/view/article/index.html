@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{$article_info.title | default='多麦五金商城'}</title>
+    {include file='public/public_head' /}
+</head>
+<body>
+    <div class="main-wrap article-wrap">
+        <div class="container">
+            <div class="article-title-wrap">{$article_info.title | default='多麦五金商城'}</div>
+            <div class="article-context">{$article_info.content|raw}</div>
+            <div class="btn-wrap pos-f">
+                <div class="btn-item contact-btn-item">
+                    <a href="tel:{$customer_mobile}" class="btn-item-a f-fff">联系客服</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {include file='public/public_script' /}
+</body>
+</html>

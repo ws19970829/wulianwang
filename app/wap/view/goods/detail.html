@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{$web_title}</title>
+    {include file='public/public_head' /}
+    <link rel="stylesheet" href="__COMMON__/layuiadmin/layui/css/layui.css" />
+    <link rel="stylesheet" href="__WAP__/css/swiper.min.css" />
+</head>
+<body>
+    <div class="main-wrap goods-wrap over">
+        <div class="content">
+            <!-- banner-wrap -->
+            <div class="content-item-wrap banner-wrap goods-banner-wrap">
+                <div class="swiper-container goods-swiper-container">
+                    <div class="swiper-wrapper">
+                        {volist name='data.slider_image' id='vo'}
+                            <div class="swiper-slide pic-wrap">
+                                <img src="{$vo}" alt="" class="swiper-slide-img pic-img goods-banner-img" />
+                            </div>
+                        {/volist}
+                    </div>
+                    <div class="swiper-pagination goods-swiper-pagination"></div>
+                </div>
+            </div>
+            <!-- goods-title-info -->
+            <div class="content-item-wrap goods-info-wrap">
+                <div class="container">
+                    <div class="flex rcb title-wrap goods-title-wrap">
+                        <div class="title goods-title">{$data.store_name}</div>
+                        <div class="flex rce btn-item title-btn-item" id='good_collect'>
+                            {if $data.collect==1}
+                            <img src="__WAP__/icon/icon_collect_cur.png" class="btn-icon collect-icon" />
+                            <div class="btn-title">已收藏</div>
+                            {else /}
+                            <img src="__WAP__/icon/icon_collect.png" class="btn-icon collect-icon" />
+                            <div class="btn-title">收藏</div>
+                            {/if}
+                        </div>
+                    </div>
+                    <div class="goods-info-item mt-10 mb-10">参数规格：{$attr_value[0]['suk']|default=''}</div>
+                    <div class="goods-info-item">
+                        <span class="goods-info-text goods-min-order">起订量：{$data.moq}{$data.unit_name|default='件'}</span>
+                        <span class="goods-info-text goods-sales-num">销量：{$data.sales}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- goods-price-info -->
+            <div class="content-item-wrap goods-price-info">
+                <div class="container">
+                    <div class="flex rcs content-title-wrap">
+                        <img src="__WAP__/icon/icon_tag2.png" alt="" class="title-icon" />
+                        <span class="content-title-text">产品价格</span>
+                    </div>
+                    <div class="content-item-con-wrap">
+                        <div class="goods-attr-tips">选择规格获取报价</div>
+                        <form class="layui-form goods-attr-wrap">
+                            <select name="" id="" class="goods-attr-select"  lay-filter="goods-attr-select">
+                                {volist name='attr_value' id='v'}
+                                <option value="{$v.unique}">{$v.suk}</option>
+                                {/volist}
+                            </select>
+                        </form>
+                        <div class="goods-limit-item">优惠量：{$attr_value[0]['discount']|default=0}{$data.unit_name|default='件'}</div>
+      
+                        <div class="goods-limit-item attr_text">优惠量：小于等于{$attr_value[0]['discount']|default=''}{$data.unit_name|default='件'}¥{$attr_value[0]['discount_lt']|default=0}每{$data.unit_name|default='件'}，大于{$attr_value[0]['discount']|default=0}{$data.unit_name|default='件'} ￥{$attr_value[0]['discount_gt']|default=0}每{$data.unit_name|default='件'}</div>
+                        
+                        <div class="btn-item submit-order-btn">立即下单</div>
+                    </div>
+                </div>
+            </div>
+            <!-- store-info -->
+            <div class="content-item-wrap store-info-wrap">
+                <div class="flex rcb store-info-detail">
+                    <div class="pic-wrap store-pic-wrap">
+                        <img src="{$data.shop.logo_img}" alt="" class="pic-img store-img" onerror="javascript:this.src='/static/shop.jpg'" />
+                    </div>
+                    <div class="store-detail-wrap">
+                        <div class="flex rcb store-title-wrap">
+                            <span class="store-title">{$data.shop.real_name}</span>
+                            <span class="collect-btn-item" id='shop_collect'>{if $data.shop_collect==1}已收藏{else /}收藏{/if}</span>
+                        </div>
+                        <div class="store-business-info">{$data.shop.remark}</div>
+                        <div class="text-r enter-btn-item">进入店铺</div>
+                    </div>
+                </div>
+                <div class="coupon-info-wrap">
+                    <div class="flex rcs content-title-wrap">
+                        <img src="__WAP__/icon/icon_tag2.png" alt="" class="title-icon" />
+                        <span class="content-title-text">店铺优惠券</span>
+                    </div>
+                    <div class="info-con-wrap">
+                        <ul class="clearfix list-wrap coupon-list-wrap">
+                            {volist name='coupon' id='v' empty='$empty_html'}
+                            <li class="list-item coupon-list-item coupon-list-item">
+                                    <div class="flex rcb h100 list-item-con">
+                                        <div class="left-wrap flex ccc pos-r coupon-price-wrap">
+                                            <div class="price-tag-wrap flex ccc pos-a">
+                                                <span class="price-tag-title">省</span>
+                                            </div>
+                                            <div class="price-title-wrap">
+                                                <span class="ptice-icon">¥</span>
+                                                <span class="ptice-value">{$v.coupon_price}</span>
+                                            </div>
+                                            <div class="price-subtitle">满{$v.use_min_price}元可用</div>
+                                        </div>
+                                        <div class="right-wrap coupon-detail-wrap">
+                                            <div class="flex rcs detail-info-item">
+                                                <div class="coupon-type">店铺优惠券</div>
+                                                <div class="coupon-limit">满{$v.use_min_price}元优惠{$v.coupon_price}元</div>
+                                            </div>
+                                            <div class="coupon-desc">
+                                                <p class="desc-item">·仅{$data.shop.real_name}</p>
+                                                <p class="desc-item">·仅店铺内{$v.cate_name|default='全部品'}类商品可用元优惠{$v.coupon_price}元</p>
+                                            </div>
+                                            <div class="flex rcb coupon-time-wrap">
+                                                {notempty name='$v.start_time'}
+                                                <div class="coupon-time">{$v.start_time}至{$v.end_time}</div>
+                                                {else /}
+                                                <div class="coupon-time">不限时</div>
+                                                {/notempty}
+                                                <div class="ml-10 coupon-btn-item receive" issue_id='{$v.id}'>点击领取</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            {/volist}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- goods-detail -->
+            <div class="content-item-wrap goods-detail-wrap">
+                <div class="container">
+                    <div class="flex rcs content-title-wrap">
+                        <img src="__WAP__/icon/icon_tag2.png" alt="" class="title-icon" />
+                        <span class="content-title-text">产品详情</span>
+                    </div>
+                    <div class="goods-detail-context mb-5">
+                        {:htmlspecialchars_decode($data.content)}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {include file='public/public_script' /}
+</body>
+<script src="__COMMON__/layuiadmin/layui/layui.js"></script>
+<script src="__WAP__/js/swiper.min.js"></script>
+<script>
+    var swiperH = new Swiper('.goods-swiper-container', {
+        // spaceBetween: 50,
+        autoplay: {
+            delay: 5000,
+        },
+        pagination: {
+            el: '.goods-swiper-pagination',
+            clickable: true,
+        },
+    });
+    var json = JSON.parse('{$json|raw}');
+    
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form
+        ,layer = layui.layer
+        ,layedit = layui.layedit
+        ,laydate = layui.laydate;
+
+        form.on('select(goods-attr-select)', function({value}){
+            var discount = json[value]['discount']||0;
+            var discount_lt = json[value]['discount_lt']||0;
+            var discount_gt = json[value]['discount_gt']||0;
+            var unit = "{$data.unit_name|default='件'}";
+            var text = `优惠量：小于等于${discount}${unit}¥${discount_lt}每${unit}，大于${discount}${unit} ￥${discount_gt}每${unit}`;
+            var text1 = `优惠量：${discount}${unit}`;
+            $('.attr_text').text(text).prev().text(text1);
+            $('.goods-min-order').text('起订量：'+json[value]['moq']+unit);
+        })
+    });
+    $('#shop_collect').click(function(){
+      var uid = '{$uid}';
+      if(uid==false){
+        layer.msg('请先登录');
+      }else{
+        $.ajax({
+            type: "post",
+            url: "{:url('api/collect/add')}",
+            data: {
+               type:2,
+               collect_id: '{$data.shop.id}'
+            },
+            beforeSend: function(request) {
+                request.setRequestHeader("Authori-zation","{$token}");
+            },
+            dataType: "json",
+            success: function (res) {
+                if(res.status==200){
+                    var content = res.msg;
+                    if(res.data.status==1){
+                        $('#shop_collect').html('取消收藏')
+                    }else{
+                        $('#shop_collect').html('收藏')
+                    }
+                }
+            }
+        });
+      }
+    })
+
+    $('#good_collect').click(function(){
+      var uid = '{$uid}';
+      var that = $(this);
+      if(uid==false){
+        layer.msg('请先登录');
+      }else{
+        $.ajax({
+            type: "post",
+            url: "{:url('api/collect/add')}",
+            data: {
+               type:1,
+               collect_id: '{$data.id}'
+            },
+            beforeSend: function(request) {
+                request.setRequestHeader("Authori-zation","{$token}");
+            },
+            dataType: "json",
+            success: function (res) {
+                if(res.status==200){
+                    var content = res.msg;
+                    if(res.data.status==1){
+                        that.children().eq(1).html('已收藏')
+                        that.children().eq(0).attr('src','__WAP__/icon/icon_collect_cur.png')
+                    }else{
+                        that.children().eq(1).html('收藏')
+                        that.children().eq(0).attr('src','__WAP__/icon/icon_collect.png')
+                    }
+                }
+            }
+        });
+      }
+    })
+
+    $('.receive').click(function(){
+        var uid = '{$uid}';
+        var couponId = $(this).attr('issue_id');
+        if(uid==false){
+         layer.msg('请先登录');
+          return;
+        }
+        $.ajax({
+            type: "post",
+            url: "{:url('api/coupon/receive')}",
+            data: {
+                couponId
+            },
+            beforeSend: function(request) {
+                request.setRequestHeader("Authori-zation","{$token}");
+            },
+            dataType: "json",
+            success: function (res) {
+                if(res.status==200){
+                    layer.msg('领取成功',function(){
+                        location.reload(true);
+                    });
+                }else{
+                    layer.msg(res.msg);
+                }
+            }
+        });
+    })
+
+    
+    $(function() {
+        var submitBtnItem = $('.submit-order-btn');
+        submitBtnItem.on('click', function() {
+            var _this = $(this);
+            var data = {
+                btnEvent: 'normal',
+                btnType: 'order_btn_create',
+            }
+            postMessage(data);
+        });
+
+        var shopBtnItem = $('.enter-btn-item');
+        shopBtnItem.on('click', function() {
+            var _this = $(this);
+            var data = {
+                btnType: 'navigate',
+                pageTitle: '{$data.shop.real_name}',
+                component: 'StoreDetail',
+                params: {
+                    item: {
+                        id: '{$data.shop.id}',
+                    },
+                },
+            }
+            postMessage(data);
+        });
+
+    })
+
+    function postMessage(data) {
+        console.log('data---->', data);
+        window.ReactNativeWebView && window.ReactNativeWebView.postMessage(JSON.stringify(data));
+    }
+
+</script>
+</html>

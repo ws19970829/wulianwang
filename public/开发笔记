@@ -1,0 +1,10 @@
+总后台用户管理  superadmin/setting/SystemTenant
+使用tenant_id来进行平台方区分
+总后台创建平台方时调用
+
+superadmin/setting/SystemTenant/create_init_data(session('tenant_id'));
+方法 来创建初始数据
+系统的配置项，都是以tenant_id作为拆分
+
+
+平台方模块是admin模块

@@ -1,0 +1,131 @@
+@charset "UTF-8";
+
+/**
+ *  Author: ToDo Meng
+ *  Date:   2017.7.12
+ *  Time:   09:00
+ *  Desc:   网站主页样式表
+**/
+
+
+/************       Common       ************/
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.main-wrap {
+}
+
+.download-wrap {
+    height: 100%;
+    text-align: center;
+    background-image: url(../img/img_bg_download.png);
+    background-color: #fff;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
+
+.download-wrap .content-item {
+    background: none;
+}
+
+.content {
+}
+
+.title-content {
+    color: #006ba1;
+}
+
+.title-content .title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.title-content .subtitle {
+    font-size: 1.1rem;
+}
+
+.btn-content {
+}
+
+.btn-item {
+}
+
+.btn-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.3rem;
+}
+
+.btn-title {
+}
+
+/************       Common       ************/
+
+/************       Content      ************/
+
+
+.logo-wrap {
+    /* margin: 5rem auto 2rem; */
+}
+
+.logo-wrap .logo-img {
+    width: 70vw;
+    max-width: 1024px;
+}
+
+.download-btn-content {
+    /* margin: 10rem auto 1rem; */
+}
+
+.download-btn-item {
+    border-radius: .2rem;
+    border: 1px solid #fff;
+    margin: 0 1rem;
+    padding: .5rem 0;
+    color: #fff;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 9rem;
+    background-color: rgb(126 173 251 / .3);
+}
+
+#mark {
+    display: none;
+    position: absolute;
+    top: 0px;
+    bottom: -200px;
+    left: 0px;
+    right: 0px;
+    z-index: 999999;
+    background: rgb(0 0 0 / 0.6);
+    text-align: right;
+    padding-right: 25px;
+}
+
+#mark img {
+    width: 60%;
+    margin-top: 80px;
+}
+
+.btn-icon {
+}
+
+.btn-title {
+}
+
+.footer-title-content {
+    color: #fff;
+    font-size: 1.4rem;
+    line-height: 1.6;
+    margin-top: 1rem;
+}
+
+.footer-title-content .title {
+}
